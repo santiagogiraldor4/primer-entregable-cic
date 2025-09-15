@@ -1,0 +1,32 @@
+name: Primer Workflow CI/CD - Información del Sistema
+
+on:
+  push: # 2. Evento que se dispara cuando se hace push al repositorio
+    branches: # 2b. Restringido a la rama main
+      - main
+  pull_request: # 2. Evento que se dispara cuando se crea un pull request
+    branches:
+      - main
+  workflow_dispatch: # 2. Evento para ejecutar manualmente el workflow
+
+jobs:
+  imprimir_info:  # No cambies este nombre, lo usaremos para evaluar
+    runs-on: ubuntu-latest  # 3. Ejecutar en Ubuntu (sistema operativo Linux)
+
+    steps:
+      - uses: actions/checkout@v3  # Este paso clona tu repositorio. No lo modifiques.
+
+      - name: Imprimir Mensaje Personalizado
+        # 4. Mensaje personalizado con nombre
+        # 5. Comando para obtener la fecha y hora actual
+        run: |
+          echo "Hola, soy William Miguel y este es mi primer workflow!"  
+          echo "La fecha y hora actual es: $(date)"  
+
+      - name: Configurar Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.11' # 6. Versión de Python 3.11
+
+      - name: Ejecutar script Python
+        run: python mi_script.py #7. Ejecutar el script de Python
